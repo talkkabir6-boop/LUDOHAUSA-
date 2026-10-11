@@ -19,36 +19,11 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Generate Gradle Wrapper
-      run: |
-        mkdir -p gradle/wrapper
-        cat > gradle/wrapper/gradle-wrapper.properties << 'PROPS'
-        distributionBase=GRADLE_USER_HOME
-        distributionPath=wrapper/dists
-        distributionUrl=https\://services.gradle.org/distributions/gradle-8.0-bin.zip
-        networkTimeout=10000
-        validateDistributionUrl=true
-        zipStoreBase=GRADLE_USER_HOME
-        zipStorePath=wrapper/dists
-        PROPS
-        
-        # Download gradle wrapper jar
-        curl -L -o gradle/wrapper/gradle-wrapper.jar https://raw.githubusercontent.com/gradle/gradle/v8.0.0/gradle/wrapper/gradle-wrapper.jar
-        
-        # Create gradlew script
-        cat > gradlew << 'GRADLEW'
-        #!/bin/sh
-        exec java -classpath "$APP_HOME/gradle/wrapper/gradle-wrapper.jar" org.gradle.wrapper.GradleWrapperMain "$@"
-        GRADLEW
-        chmod +x gradlew
-        
-        # Create gradlew.bat
-        cat > gradlew.bat << 'BAT'
-        @java -classpath "%~dp0gradle\wrapper\gradle-wrapper.jar" org.gradle.wrapper.GradleWrapperMain %*
-        BAT
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v3
 
     - name: Build Debug APK
-      run: ./gradlew assembleDebug --no-daemon
+      run: gradle assembleDebug --no-daemon
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
