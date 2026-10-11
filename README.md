@@ -1,17 +1,9 @@
-settings.gradle
-pluginManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
-}
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-rootProject.name = "LudoHausa"
-include ':app'
+# LUDOHAUSA-
+
+Ludo Hausa Yan Gida Android Game
+
+Wannan shine wasan Ludo na Hausa. Ana iya wasa shi ba tare da yanar gizo ba.
+
+## Yadda Ake Gina APK
+
+Ana amfani da GitHub Actions don gina APK ta atomatik.
